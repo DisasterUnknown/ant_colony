@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=3 uid="uid://beuttv7o1u3s6"]
+
+[ext_resource type="Script" path="res://scripts/ant.gd" id="1_3wvu3"]
+[ext_resource type="Texture2D" uid="uid://c2nuwhdnx7otv" path="res://res/Ants.png" id="2_5iugn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86t4u"]
+atlas = ExtResource("2_5iugn")
+region = Rect2(540, 300, 90, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f44qw"]
+atlas = ExtResource("2_5iugn")
+region = Rect2(630, 300, 90, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7prn"]
+atlas = ExtResource("2_5iugn")
+region = Rect2(720, 300, 90, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wqyv"]
+atlas = ExtResource("2_5iugn")
+region = Rect2(0, 300, 90, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d7wp"]
+atlas = ExtResource("2_5iugn")
+region = Rect2(90, 300, 90, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuxab"]
+atlas = ExtResource("2_5iugn")
+region = Rect2(180, 300, 90, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_et8qg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86t4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f44qw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7prn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f44qw")
+}],
+"loop": true,
+"name": &"food_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wqyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d7wp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuxab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d7wp")
+}],
+"loop": true,
+"name": &"idle_walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_meg8w"]
+radius = 412.03
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_asru6"]
+radius = 13.0384
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_3wvu3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.793054, 0.793054)
+sprite_frames = SubResource("SpriteFrames_et8qg")
+animation = &"idle_walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+
+[node name="DectionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DectionArea"]
+shape = SubResource("CircleShape2D_meg8w")
+
+[node name="RandomMoveTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="InConsumeRange" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InConsumeRange"]
+visible = false
+light_mask = 2
+visibility_layer = 2
+shape = SubResource("CircleShape2D_asru6")
+
+[connection signal="body_entered" from="DectionArea" to="." method="_on_dection_area_body_entered"]
+[connection signal="body_exited" from="DectionArea" to="." method="_on_dection_area_body_exited"]
+[connection signal="timeout" from="RandomMoveTimer" to="." method="_on_random_move_timer_timeout"]
+[connection signal="body_entered" from="InConsumeRange" to="." method="_on_in_consume_range_body_entered"]

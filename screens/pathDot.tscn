@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc3k6377kv2fn"]
+
+[ext_resource type="Script" path="res://scripts/pathDot.gd" id="1_6exyr"]
+[ext_resource type="Texture2D" uid="uid://ncf3ipvpeh4u" path="res://res/noFood.tres" id="1_i8knp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pr3rq"]
+radius = 9.0
+
+[node name="noFood" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_6exyr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.19209e-07, -1.19209e-07)
+scale = Vector2(0.201172, 0.201172)
+texture = ExtResource("1_i8knp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_pr3rq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://du3vwbcxbgdnl"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_u81o4"]
+[ext_resource type="PackedScene" uid="uid://beuttv7o1u3s6" path="res://screens/ant.tscn" id="1_xchi1"]
+[ext_resource type="PackedScene" uid="uid://degsi8m5p2rna" path="res://screens/antHill.tscn" id="4_vysn2"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_u81o4")
+
+[node name="AntHill" parent="." instance=ExtResource("4_vysn2")]
+position = Vector2(2342, 1164)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_xchi1")]
+position = Vector2(2470, 1305)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("1_xchi1")]
+position = Vector2(2449, 1005)
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("1_xchi1")]
+position = Vector2(2517, 1153)
+
+[node name="CharacterBody2D6" parent="." instance=ExtResource("1_xchi1")]
+position = Vector2(2332, 1341)
+
+[node name="CharacterBody2D7" parent="." instance=ExtResource("1_xchi1")]
+position = Vector2(2332, 1341)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("1_xchi1")]
+position = Vector2(2200, 1036)
+
+[node name="CharacterBody2D5" parent="." instance=ExtResource("1_xchi1")]
+position = Vector2(2180, 1218)
+
+[node name="CharacterBody2D8" parent="." instance=ExtResource("1_xchi1")]
+position = Vector2(2314, 982)
